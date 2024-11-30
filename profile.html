@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Page</title>
+
+    <!-- Custom Css -->
+    <link rel="stylesheet" href="assets/css/profile.css">
+
+    <!-- FontAwesome 5 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+</head>
+<body>
+    <!-- Navbar top -->
+    <div class="navbar-top">
+        <div class="title">
+            <h1>Profile</h1>
+        </div>
+
+        <!-- Navbar -->
+        <ul>
+            <li>
+                <a href="logout.php">
+                    <i class="fa fa-sign-out-alt fa-2x"></i> Sign Out
+                </a>
+            </li>
+        </ul>
+        <!-- End -->
+    </div>
+    <!-- End -->
+
+    <!-- Main -->
+    <div class="main">
+        <h2>User Description</h2>
+        <div class="card">
+            <div class="card-body">
+                <!-- Edit Icon (Pen) -->
+                <i class="fa fa-pen fa-xs edit" onclick="enableEdit()"></i>
+
+                <!-- Profile Form (Initially Read-Only, becomes editable on Edit click) -->
+                <form method="POST" id="profileForm" action="profile.php">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>First Name</td>
+                                <td>:</td>
+                                <td><input type="text" name="first_name" value="<?php echo $first_name; ?>" id="first_name" readonly></td>
+                            </tr>
+                            <tr>
+                                <td>Last Name</td>
+                                <td>:</td>
+                                <td><input type="text" name="last_name" value="<?php echo $last_name; ?>" id="last_name" readonly></td>
+                            </tr>
+                            <tr>
+                                <td>Email</td>
+                                <td>:</td>
+                                <td><input type="email" name="email" value="<?php echo $email; ?>" id="email" readonly></td>
+                            </tr>
+                            <tr>
+                                <td>Phone Number</td>
+                                <td>:</td>
+                                <td><input type="text" name="phone_number" value="<?php echo $phone_number; ?>" id="phone_number" readonly></td>
+                            </tr>
+                            <tr>
+                                <td>Bio</td>
+                                <td>:</td>
+                                <td><input type="text" name="bio" value="<?php echo $bio; ?>" id="bio" readonly></td>
+                            </tr>
+                            <tr>
+                                <td>Profile Picture</td>
+                                <td>:</td>
+                                <td><img src="uploads/<?php echo $profile_picture; ?>" alt="Profile Picture" width="100"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <!-- Update Button (Only visible when editing) -->
+                    <div id="updateButton" style="display: none;">
+                        <button type="submit" name="update_profile">Update Profile</button>
+                    </div>
+
+                    <!-- Delete Button -->
+                    <form method="POST" style="display: inline;">
+                        <button type="submit" name="delete_profile" onclick="return confirm('Are you sure you want to delete your profile?');">Delete</button>
+                    </form>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- End -->
+
+    <script>
+        // Function to enable editing of the profile fields
+        function enableEdit() {
+            document.getElementById('first_name').removeAttribute('readonly');
+            document.getElementById('last_name').removeAttribute('readonly');
+            document.getElementById('email').removeAttribute('readonly');
+            document.getElementById('phone_number').removeAttribute('readonly');
+            document.getElementById('bio').removeAttribute('readonly');
+            
+            // Show the Update button
+            document.getElementById('updateButton').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
